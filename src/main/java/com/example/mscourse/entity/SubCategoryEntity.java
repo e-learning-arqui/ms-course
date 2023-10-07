@@ -14,12 +14,13 @@ public class SubCategoryEntity {
     @Column(name = "DESCRIPTION", nullable = false, length = 200)
     private String description;
 
-    @Column(name = "CATEGORY_ID", nullable = false)
-    private Long categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", nullable = false, referencedColumnName = "CATEGORY_ID")
+    private CategoryEntity categoryId;
 
     public SubCategoryEntity() {}
 
-    public SubCategoryEntity(String subCategoryName, String description, Long categoryId) {
+    public SubCategoryEntity(String subCategoryName, String description, CategoryEntity categoryId) {
         this.subCategoryName = subCategoryName;
         this.description = description;
         this.categoryId = categoryId;
@@ -51,11 +52,11 @@ public class SubCategoryEntity {
         this.description = description;
     }
 
-    public Long getCategoryId() {
+    public CategoryEntity getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(CategoryEntity categoryId) {
         this.categoryId = categoryId;
     }
 

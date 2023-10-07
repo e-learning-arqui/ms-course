@@ -37,18 +37,20 @@ public class CourseEntity {
     @Column(name = "DURATION", nullable = false)
     private int duration;
 
-    @Column(name = "LANGUAGE_ID", nullable = false)
-    private int languageId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LANGUAGE_ID", nullable = false, referencedColumnName = "LANGUAGE_ID")
+    private LanguageEntity languageId;
 
-    @Column(name = "LEVEL_ID", nullable = false)
-    private int levelId;
-
-    @Column(name = "SUB_CATEGORY_ID", nullable = false)
-    private int subCategoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LEVEL_ID", nullable = false, referencedColumnName = "LEVEL_ID")
+    private LevelEntity levelId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_CATEGORY_ID", nullable = false, referencedColumnName = "SUB_CATEGORY_ID")
+    private SubCategoryEntity subCategoryId;
 
     public CourseEntity() {}
 
-    public CourseEntity(String title, Date startDate, boolean status, String description, Date lastUpdate, BigDecimal amount, int version, int duration, int languageId, int levelId, int subCategoryId) {
+    public CourseEntity(String title, Date startDate, boolean status, String description, Date lastUpdate, BigDecimal amount, int version, int duration, LanguageEntity languageId, LevelEntity levelId, SubCategoryEntity subCategoryId) {
         this.title = title;
         this.startDate = startDate;
         this.status = status;
@@ -135,27 +137,27 @@ public class CourseEntity {
         this.duration = duration;
     }
 
-    public int getLanguageId() {
+    public LanguageEntity getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
+    public void setLanguageId(LanguageEntity languageId) {
         this.languageId = languageId;
     }
 
-    public int getLevelId() {
+    public LevelEntity getLevelId() {
         return levelId;
     }
 
-    public void setLevelId(int levelId) {
+    public void setLevelId(LevelEntity levelId) {
         this.levelId = levelId;
     }
 
-    public int getSubCategoryId() {
+    public SubCategoryEntity getSubCategoryId() {
         return subCategoryId;
     }
 
-    public void setSubCategoryId(int subCategoryId) {
+    public void setSubCategoryId(SubCategoryEntity subCategoryId) {
         this.subCategoryId = subCategoryId;
     }
 
