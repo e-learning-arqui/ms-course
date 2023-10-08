@@ -3,10 +3,11 @@ package com.example.mscourse.api;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
 import com.example.mscourse.bl.CourseBl;
 
 @RestController
@@ -30,5 +31,28 @@ public class CourseApi {
         }
 
     }
+
+
+    @GetMapping("/course")
+    public ResponseDto<Page<CourseDto>> getAllCourses(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size
+    ){
+        ResponseDto<Page<CourseDto>> response = new ResponseDto<>();
+        Pageable pageable = PageRequest.of(page, size);
+        try{
+            Page<CourseDto> CouseDtoPage= courseBl.findAllCourses(pageable);
+            response.setCode("0000");
+            response.setResponse(CouseDtoPage);
+            return response;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return response;
+        }
+
+    }
+
 
 }

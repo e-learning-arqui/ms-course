@@ -11,3 +11,5 @@ Content-Type: application/json
   "levelId": 2,
   "subCategoryId": 3
 }
+###
+GET http://localhost:7777/api/v1/course?page=0&size=3

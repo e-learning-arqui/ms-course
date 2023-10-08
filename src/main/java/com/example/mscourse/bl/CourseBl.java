@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.mscourse.dao.CourseRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 
@@ -42,7 +44,28 @@ public class CourseBl {
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
 
-        courseRepository.save(courseEntity);
+        courseRepository.saveAndFlush(courseEntity);
+    }
+
+
+    public Page<CourseDto> findAllCourses(Pageable pageable){
+        log.info("Finding all courses");
+        Page<CourseEntity> courseEntityPage = courseRepository.findAllCourses(pageable);
+        return courseEntityPage.map(this::convertToCouseDto);
+    }
+
+    private CourseDto convertToCouseDto(CourseEntity courseEntity){
+        CourseDto courseDto = new CourseDto();
+        courseDto.setTitle(courseEntity.getTitle());
+        courseDto.setDescription(courseEntity.getDescription());
+        courseDto.setAmount(courseEntity.getAmount());
+        courseDto.setVersion(courseEntity.getVersion());
+        courseDto.setDuration(courseEntity.getDuration());
+        courseDto.setLanguageId(courseEntity.getLanguageId().getId());
+        courseDto.setLevelId(courseEntity.getLevelId().getId());
+        courseDto.setSubCategoryId(courseEntity.getSubCategoryId().getId());
+
+        return courseDto;
     }
 
 
