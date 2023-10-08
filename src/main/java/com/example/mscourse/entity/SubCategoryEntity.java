@@ -60,6 +60,15 @@ public class SubCategoryEntity {
         this.categoryId = categoryId;
     }
 
+
+    public void setId(Long id) {
+        this.subCategoryId = id;
+    }
+    public Long getId() {
+        return this.subCategoryId;
+    }
+
+
     @Override
     public String toString() {
         return "SubCategory{" +

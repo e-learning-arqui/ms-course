@@ -36,6 +36,14 @@ public class LanguageEntity {
     public void setName(String name) {
         this.name = name;
     }
+    // set ID
+    public void setId(Long id) {
+        this.languageId = id;
+    }
+    // get ID
+    public Long getId() {
+        return this.languageId;
+    }
 
     @Override
     public String toString() {

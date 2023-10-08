@@ -1,7 +1,7 @@
 package com.example.mscourse.entity;
 import jakarta.persistence.*;
 @Entity
-@Table(name = "LEVEL")
+@Table(name = "LEVEL_COURSE")
 public class LevelEntity {
 
     @Id
@@ -46,6 +46,15 @@ public class LevelEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    //setID
+    public void setId(Long id) {
+        this.levelId = id;
+    }
+    //getID
+    public Long getId() {
+        return this.levelId;
     }
 
     @Override
