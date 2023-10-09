@@ -15,8 +15,11 @@ import com.example.mscourse.bl.CourseBl;
 public class CourseApi {
     @Autowired
     private CourseBl courseBl;
+
     @PostMapping("/course")
     public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
+
+
         ResponseDto<String> response = new ResponseDto<>();
         try{
             courseBl.saveCourse(courseDto);

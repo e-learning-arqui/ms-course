@@ -48,9 +48,14 @@ public class CourseEntity {
     @JoinColumn(name = "SUB_CATEGORY_ID", nullable = false, referencedColumnName = "SUB_CATEGORY_ID")
     private SubCategoryEntity subCategoryId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROFESSOR_ID", nullable = false, referencedColumnName = "PROFESSOR_ID")
+    private ProfessorEntity professorId;
     public CourseEntity() {}
 
-    public CourseEntity(String title, Date startDate, boolean status, String description, Date lastUpdate, BigDecimal amount, int version, int duration, LanguageEntity languageId, LevelEntity levelId, SubCategoryEntity subCategoryId) {
+    public CourseEntity(String title, Date startDate, boolean status, String description, Date lastUpdate,
+                        BigDecimal amount, int version, int duration, LanguageEntity languageId,
+                        LevelEntity levelId, SubCategoryEntity subCategoryId, ProfessorEntity professorId ) {
         this.title = title;
         this.startDate = startDate;
         this.status = status;
@@ -62,6 +67,8 @@ public class CourseEntity {
         this.languageId = languageId;
         this.levelId = levelId;
         this.subCategoryId = subCategoryId;
+        this.professorId = professorId;
+
     }
 
 
@@ -87,6 +94,14 @@ public class CourseEntity {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public ProfessorEntity getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(ProfessorEntity professorId) {
+        this.professorId = professorId;
     }
 
     public boolean isStatus() {
@@ -176,6 +191,7 @@ public class CourseEntity {
                 ", languageId=" + languageId +
                 ", levelId=" + levelId +
                 ", subCategoryId=" + subCategoryId +
+                ", professorId=" + professorId +
                 '}';
     }
 }
