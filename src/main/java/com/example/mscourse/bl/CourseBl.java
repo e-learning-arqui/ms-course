@@ -1,9 +1,6 @@
 package com.example.mscourse.bl;
 import com.example.mscourse.dto.CourseDto;
-import com.example.mscourse.entity.CourseEntity;
-import com.example.mscourse.entity.LanguageEntity;
-import com.example.mscourse.entity.LevelEntity;
-import com.example.mscourse.entity.SubCategoryEntity;
+import com.example.mscourse.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class CourseBl {
         languageEntity.setId(courseDto.getLanguageId());
         LevelEntity levelEntity = new LevelEntity();
         levelEntity.setId(courseDto.getLevelId());
+        ProfessorEntity professorEntity = new ProfessorEntity();
+        professorEntity.setProfessorId(courseDto.getProfessorId());
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
         subCategoryEntity.setId(courseDto.getSubCategoryId());
 
@@ -43,6 +42,7 @@ public class CourseBl {
         courseEntity.setLanguageId(languageEntity);
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
+        courseEntity.setProfessorId(professorEntity);
 
         courseRepository.saveAndFlush(courseEntity);
     }
