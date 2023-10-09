@@ -54,5 +54,23 @@ public class CourseApi {
 
     }
 
+    //Register course for user
+    @PostMapping("/course/{id}/register")
+    public ResponseDto<String> registerCourse(@PathVariable Long id) {
+        ResponseDto<String> response = new ResponseDto<>();
+        try{
+            //courseBl.registerCourse(id);
+            response.setCode("0000");
+            response.setResponse("Course registered successfully");
+            return response;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return response;
+        }
+
+    }
+
 
 }
