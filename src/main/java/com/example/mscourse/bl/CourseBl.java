@@ -1,9 +1,7 @@
 package com.example.mscourse.bl;
+import com.example.mscourse.dao.ProfessorRepository;
 import com.example.mscourse.dto.CourseDto;
-import com.example.mscourse.entity.CourseEntity;
-import com.example.mscourse.entity.LanguageEntity;
-import com.example.mscourse.entity.LevelEntity;
-import com.example.mscourse.entity.SubCategoryEntity;
+import com.example.mscourse.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,14 @@ import java.util.Date;
 public class CourseBl {
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private ProfessorRepository professorRepository;
     private final Logger log = LoggerFactory.getLogger(CourseBl.class);
 
-    public void saveCourse(CourseDto courseDto) {
+    public void saveCourse(CourseDto courseDto){
         log.info("Saving course");
+
+        ProfessorEntity professor = professorRepository.getProfessorByProfessorKeycloakId(courseDto.getProfessorKeycloakId());
 
         CourseEntity courseEntity = new CourseEntity();
         LanguageEntity languageEntity = new LanguageEntity();
@@ -43,7 +45,9 @@ public class CourseBl {
         courseEntity.setLanguageId(languageEntity);
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
-
+        courseEntity.setProfessorId(professor);
+        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseEntity.getProfessorId().getProfessorId()
+             );
         courseRepository.saveAndFlush(courseEntity);
     }
 
@@ -51,10 +55,16 @@ public class CourseBl {
     public Page<CourseDto> findAllCourses(Pageable pageable){
         log.info("Finding all courses");
         Page<CourseEntity> courseEntityPage = courseRepository.findAllCourses(pageable);
-        return courseEntityPage.map(this::convertToCouseDto);
+        return courseEntityPage.map(this::convertToCourseDto);
     }
 
-    private CourseDto convertToCouseDto(CourseEntity courseEntity){
+    public CourseDto findById(Long courseId){
+        log.info("Finding course by id: " + courseId);
+        CourseEntity courseEntity = courseRepository.findByCourseId(courseId);
+        return convertToCourseDto(courseEntity);
+    }
+
+    private CourseDto convertToCourseDto(CourseEntity courseEntity){
         CourseDto courseDto = new CourseDto();
         courseDto.setTitle(courseEntity.getTitle());
         courseDto.setDescription(courseEntity.getDescription());

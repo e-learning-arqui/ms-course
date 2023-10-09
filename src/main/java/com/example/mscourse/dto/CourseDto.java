@@ -11,7 +11,7 @@ public class CourseDto {
     private Long languageId;
     private Long levelId;
     private Long subCategoryId;
-    private Long professorId;
+    private String professorKeycloakId;
 
     // Constructor vacío
     public CourseDto() {
@@ -19,7 +19,7 @@ public class CourseDto {
 
     // Constructor con valores
     public CourseDto(String title, String description, BigDecimal amount, int version, int duration, Long languageId, Long levelId,
-                     Long subCategoryId, Long professorId) {
+                     Long subCategoryId, String professorKeycloakIdId) {
         this.title = title;
         this.description = description;
         this.amount = amount;
@@ -28,7 +28,7 @@ public class CourseDto {
         this.languageId = languageId;
         this.levelId = levelId;
         this.subCategoryId = subCategoryId;
-        this.professorId = professorId;
+        this.professorKeycloakId = professorKeycloakIdId;
     }
 
     // Getters
@@ -64,10 +64,9 @@ public class CourseDto {
         return subCategoryId;
     }
 
-    public Long getProfessorId() {
-        return professorId;
+    public String getProfessorKeycloakId() {
+        return professorKeycloakId;
     }
-
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -101,10 +100,9 @@ public class CourseDto {
         this.subCategoryId = subCategoryId;
     }
 
-    public void setProfessorId(Long professorId) {
-        this.professorId = professorId;
+public void setProfessorKeycloakId(String professorKeycloakId) {
+        this.professorKeycloakId = professorKeycloakId;
     }
-
     // Método toString
     @Override
     public String toString() {
@@ -117,7 +115,7 @@ public class CourseDto {
                 ", languageId=" + languageId +
                 ", levelId=" + levelId +
                 ", subCategoryId=" + subCategoryId +
-                ", professorId=" + professorId +
+                ", professorId=" + professorKeycloakId +
                 '}';
     }
 }

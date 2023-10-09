@@ -5,9 +5,9 @@ spring:
   application:
     name: ms-course
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/cognito}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/cognito-hub}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:1234}
+    password: ${DB_PASSWORD:admin}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -21,12 +21,12 @@ public class CourseApi {
 
 
         ResponseDto<String> response = new ResponseDto<>();
-        try{
+        try {
             courseBl.saveCourse(courseDto);
             response.setCode("0000");
             response.setResponse("Course created successfully");
             return response;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             response.setCode("9999");
             response.setErrorMessage(ex.getMessage());
@@ -40,15 +40,32 @@ public class CourseApi {
     public ResponseDto<Page<CourseDto>> getAllCourses(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size
-    ){
+    ) {
         ResponseDto<Page<CourseDto>> response = new ResponseDto<>();
         Pageable pageable = PageRequest.of(page, size);
-        try{
-            Page<CourseDto> CouseDtoPage= courseBl.findAllCourses(pageable);
+        try {
+            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable);
             response.setCode("0000");
             response.setResponse(CouseDtoPage);
             return response;
-        }catch (Exception ex){
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return response;
+        }
+
+    }
+
+    @GetMapping("/course/{id}")
+    public ResponseDto<CourseDto> getCourseById(@PathVariable Long id) {
+        ResponseDto<CourseDto> response = new ResponseDto<>();
+        try {
+            CourseDto courseDto = courseBl.findById(id);
+            response.setCode("0000");
+            response.setResponse(courseDto);
+            return response;
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             response.setCode("9999");
             response.setErrorMessage(ex.getMessage());

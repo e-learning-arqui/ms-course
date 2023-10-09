@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
-    @Query(value = "SELECT * FROM course WHERE status = true", nativeQuery = true)
+    //@Query(value = "SELECT * FROM Course WHERE status = true", nativeQuery = true)
+    @Query(value = "SELECT c FROM CourseEntity c WHERE c.status = true")
     Page <CourseEntity> findAllCourses(Pageable pageable);
+
+    CourseEntity findByCourseId(Long courseId);
 }
 
