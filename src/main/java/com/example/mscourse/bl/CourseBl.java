@@ -29,6 +29,7 @@ public class CourseBl {
         languageEntity.setId(courseDto.getLanguageId());
         LevelEntity levelEntity = new LevelEntity();
         levelEntity.setId(courseDto.getLevelId());
+
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
         subCategoryEntity.setId(courseDto.getSubCategoryId());
 
@@ -48,6 +49,7 @@ public class CourseBl {
         courseEntity.setProfessorId(professor);
         log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId()
              );
+
         courseRepository.saveAndFlush(courseEntity);
     }
 

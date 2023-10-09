@@ -9,7 +9,8 @@ Content-Type: application/json
   "duration": 30,
   "languageId": 1,
   "levelId": 2,
-  "subCategoryId": 3
+  "subCategoryId": 3,
+  "professorId": 1
 }
 ###
 GET http://localhost:7777/api/v1/course?page=0&size=3
