@@ -16,4 +16,4 @@ Content-Type: application/json
 GET http://localhost:7777/api/v1/course?page=0&size=3
 
 ###
-GET http://localhost:7777/api/v1/course/1
+GET http://localhost:7777/api/v1/courses/professor/d4ab900f-3fe0-44ba-aacd-4ad74a7738ce

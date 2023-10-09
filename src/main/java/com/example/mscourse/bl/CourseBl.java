@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CourseBl {
@@ -57,6 +58,14 @@ public class CourseBl {
     public Page<CourseDto> findAllCourses(Pageable pageable){
         log.info("Finding all courses");
         Page<CourseEntity> courseEntityPage = courseRepository.findAllCourses(pageable);
+        return courseEntityPage.map(this::convertToCourseDto);
+    }
+
+    public Page<CourseDto> coursesByProfessorId(String professorId, Pageable pageable){
+        log.info("Finding courses by professorId: " + professorId);
+        log.info("Finding professor by professorId: " + professorId);
+        ProfessorEntity professorEntity = professorRepository.getProfessorByProfessorKeycloakId(professorId);
+        Page<CourseEntity> courseEntityPage = courseRepository.findByProfessorId(professorEntity.getProfessorId(), pageable);
         return courseEntityPage.map(this::convertToCourseDto);
     }
 

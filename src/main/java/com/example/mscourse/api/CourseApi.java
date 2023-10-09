@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.mscourse.bl.CourseBl;
 
@@ -16,7 +17,7 @@ public class CourseApi {
     @Autowired
     private CourseBl courseBl;
 
-    @PostMapping("/course")
+    @PostMapping("/courses")
     public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
 
         System.out.println("courseDto: " + courseDto.toString());
@@ -36,7 +37,7 @@ public class CourseApi {
     }
 
 
-    @GetMapping("/course")
+    @GetMapping("/courses")
     public ResponseDto<Page<CourseDto>> getAllCourses(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size
@@ -57,7 +58,7 @@ public class CourseApi {
 
     }
 
-    @GetMapping("/course/{id}")
+    @GetMapping("/courses/{id}")
     public ResponseDto<CourseDto> getCourseById(@PathVariable Long id) {
         ResponseDto<CourseDto> response = new ResponseDto<>();
         try {
@@ -75,7 +76,7 @@ public class CourseApi {
     }
 
     //Register course for user
-    @PostMapping("/course/{id}/register")
+    @PostMapping("/courses/{id}/register")
     public ResponseDto<String> registerCourse(@PathVariable Long id) {
         ResponseDto<String> response = new ResponseDto<>();
         try{
@@ -90,6 +91,17 @@ public class CourseApi {
             return response;
         }
 
+    }
+
+    @GetMapping("/courses/professor/{professorId}")
+    public ResponseEntity<Page<CourseDto>> getCoursesByProfessorId(
+            @PathVariable String professorId,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
+        Page<CourseDto> courseDtoPage = courseBl.coursesByProfessorId(professorId, pageable);
+        return ResponseEntity.ok(courseDtoPage);
     }
 
 

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
     @Query(value = "SELECT * FROM course WHERE status = true", nativeQuery = true)
@@ -12,5 +13,8 @@ public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
     Page <CourseEntity> findAllCourses(Pageable pageable);
 
     CourseEntity findByCourseId(Long courseId);
+
+    @Query(value = "SELECT c FROM CourseEntity c WHERE c.professorId.professorId = :professorId")
+    Page<CourseEntity> findByProfessorId(@Param("professorId") Long professorId, Pageable pageable);
 }
 
