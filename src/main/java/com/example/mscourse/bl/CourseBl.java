@@ -23,7 +23,7 @@ public class CourseBl {
         log.info("Saving course");
 
         ProfessorEntity professor = professorRepository.getProfessorByProfessorKeycloakId(courseDto.getProfessorKeycloakId());
-
+        log.info("Professor: " + professor.toString());
         CourseEntity courseEntity = new CourseEntity();
         LanguageEntity languageEntity = new LanguageEntity();
         languageEntity.setId(courseDto.getLanguageId());
@@ -46,7 +46,7 @@ public class CourseBl {
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
         courseEntity.setProfessorId(professor);
-        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseEntity.getProfessorId().getProfessorId()
+        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId()
              );
         courseRepository.saveAndFlush(courseEntity);
     }

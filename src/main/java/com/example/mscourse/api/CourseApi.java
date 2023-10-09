@@ -19,7 +19,7 @@ public class CourseApi {
     @PostMapping("/course")
     public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
 
-
+        System.out.println("courseDto: " + courseDto.toString());
         ResponseDto<String> response = new ResponseDto<>();
         try {
             courseBl.saveCourse(courseDto);
