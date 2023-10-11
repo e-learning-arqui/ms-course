@@ -1,0 +1,4 @@
+GET http://localhost:7777/api/v1/category/all
+
+###
+GET http://localhost:7777/api/v1/category/1/subcategory
