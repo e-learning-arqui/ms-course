@@ -1,0 +1,13 @@
+POST http://localhost:7777/api/v1/courses/sections/1/classes
+Content-Type: application/json
+
+{
+  "title": "Class 1",
+  "description": "Class 1 description",
+  "duration": 60
+
+}
+
+### Get all classes for a course
+
+GET http://localhost:7777/api/v1/courses/2/classes/all?page=0&size=5

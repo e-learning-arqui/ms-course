@@ -8,6 +8,7 @@ public class SectionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "section_id")
     private Long sectionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
