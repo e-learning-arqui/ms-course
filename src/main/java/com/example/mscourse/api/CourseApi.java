@@ -45,12 +45,16 @@ public class CourseApi {
     @GetMapping("/courses")
     public ResponseDto<Page<CourseDto>> getAllCourses(
             @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Integer languageId,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) Integer levelId
     ) {
         ResponseDto<Page<CourseDto>> response = new ResponseDto<>();
         Pageable pageable = PageRequest.of(page, size);
         try {
-            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable);
+            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable,title,languageId,categoryId,levelId);
             response.setCode("0000");
             response.setResponse(CouseDtoPage);
             return response;

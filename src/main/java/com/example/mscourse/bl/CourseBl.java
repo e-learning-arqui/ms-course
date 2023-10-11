@@ -2,6 +2,7 @@ package com.example.mscourse.bl;
 import com.example.mscourse.dao.ProfessorRepository;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.entity.*;
+import com.example.mscourse.specifications.CourseSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
 
 @Service
 public class CourseBl {
@@ -55,9 +57,24 @@ public class CourseBl {
     }
 
 
-    public Page<CourseDto> findAllCourses(Pageable pageable){
+    public Page<CourseDto> findAllCourses(Pageable pageable, String title,  Integer languageId, Integer categoryId, Integer levelId){
         log.info("Finding all courses");
-        Page<CourseEntity> courseEntityPage = courseRepository.findAllCourses(pageable);
+        Specification<CourseEntity> spec = Specification.where(null);
+        if (title != null) {
+            spec = spec.and(CourseSpecification.titleContains(title));
+        }
+        if (languageId != null) {
+            spec = spec.and(CourseSpecification.hasLanguage(languageId));
+        }
+        if (categoryId != null) {
+            spec = spec.and(CourseSpecification.hasCategory(categoryId));
+        }
+        if (levelId != null) {
+            spec = spec.and(CourseSpecification.hasLevel(levelId));
+        }
+        //spec = spec.and(CourseSpecification.orderByTitle());
+
+        Page<CourseEntity> courseEntityPage = courseRepository.findAll(spec,pageable);
         return courseEntityPage.map(this::convertToCourseDto);
     }
 
