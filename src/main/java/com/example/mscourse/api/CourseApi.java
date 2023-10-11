@@ -1,7 +1,9 @@
 package com.example.mscourse.api;
 
+import com.example.mscourse.bl.SectionBl;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
+import com.example.mscourse.dto.SectionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,9 @@ import com.example.mscourse.bl.CourseBl;
 public class CourseApi {
     @Autowired
     private CourseBl courseBl;
+
+    @Autowired
+    private SectionBl sectionBl;
 
     @PostMapping("/courses")
     public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
@@ -102,6 +107,25 @@ public class CourseApi {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
         Page<CourseDto> courseDtoPage = courseBl.coursesByProfessorId(professorId, pageable);
         return ResponseEntity.ok(courseDtoPage);
+    }
+
+
+    //Create a section for a course
+    @PostMapping("/courses/{id}/sections")
+    public ResponseEntity<ResponseDto<String>> createSection(@PathVariable Long id, @RequestBody SectionDto sectionDto) {
+        ResponseDto<String> response = new ResponseDto<>();
+        try{
+            sectionBl.saveSection(sectionDto);
+            response.setCode("0000");
+            response.setResponse("Section created successfully");
+            return ResponseEntity.ok(response);
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+
     }
 
 

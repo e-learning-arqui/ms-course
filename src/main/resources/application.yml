@@ -5,6 +5,7 @@ spring:
   application:
     name: ms-course
   datasource:
+    #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
     url: jdbc:postgresql://localhost:5432/cognito-hub
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:admin}
