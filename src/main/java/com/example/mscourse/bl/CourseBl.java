@@ -24,7 +24,7 @@ public class CourseBl {
 
     public void saveCourse(CourseDto courseDto){
         log.info("Saving course");
-
+        log.info("Finding professor by professorId: " + courseDto.getProfessorKeycloakId());
         ProfessorEntity professor = professorRepository.getProfessorByProfessorKeycloakId(courseDto.getProfessorKeycloakId());
         log.info("Professor: " + professor.toString());
         CourseEntity courseEntity = new CourseEntity();

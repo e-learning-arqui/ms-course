@@ -4,14 +4,23 @@ import com.example.mscourse.bl.SectionBl;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
 import com.example.mscourse.dto.SectionDto;
+import com.example.mscourse.service.FileService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 import com.example.mscourse.bl.CourseBl;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.rmi.ServerException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -21,6 +30,9 @@ public class CourseApi {
 
     @Autowired
     private SectionBl sectionBl;
+
+    @Autowired
+    private FileService fileService;
 
     @PostMapping("/courses")
     public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
@@ -54,7 +66,7 @@ public class CourseApi {
         ResponseDto<Page<CourseDto>> response = new ResponseDto<>();
         Pageable pageable = PageRequest.of(page, size);
         try {
-            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable,title,languageId,categoryId,levelId);
+            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable, title, languageId, categoryId, levelId);
             response.setCode("0000");
             response.setResponse(CouseDtoPage);
             return response;
@@ -88,12 +100,12 @@ public class CourseApi {
     @PostMapping("/courses/{id}/register")
     public ResponseDto<String> registerCourse(@PathVariable Long id) {
         ResponseDto<String> response = new ResponseDto<>();
-        try{
+        try {
             //courseBl.registerCourse(id);
             response.setCode("0000");
             response.setResponse("Course registered successfully");
             return response;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             response.setCode("9999");
             response.setErrorMessage(ex.getMessage());
@@ -118,19 +130,32 @@ public class CourseApi {
     @PostMapping("/courses/{id}/sections")
     public ResponseEntity<ResponseDto<String>> createSection(@PathVariable Long id, @RequestBody SectionDto sectionDto) {
         ResponseDto<String> response = new ResponseDto<>();
-        try{
+        try {
             sectionBl.saveSection(sectionDto);
             response.setCode("0000");
             response.setResponse("Section created successfully");
             return ResponseEntity.ok(response);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             response.setCode("9999");
             response.setErrorMessage(ex.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
-
     }
 
+    @PostMapping("courses/classes/{id}/files")
+    public ResponseEntity<String> uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("bucketName") String bucketName,
+            @RequestParam("classId") Long classId
 
+    ) throws ServerException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException {
+        fileService.uploadFile(file, bucketName, classId);
+
+        return ResponseEntity.ok("File uploaded successfully");
+    }
 }
+
+
+
+

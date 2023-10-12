@@ -2,7 +2,7 @@ POST http://localhost:7777/api/v1/courses
 Content-Type: application/json
 
 {
-  "title": "Angular 10",
+  "title": "Angular 1000",
   "description": "Descripción del curso",
   "amount": 99.99,
   "version": 1,
@@ -10,7 +10,7 @@ Content-Type: application/json
   "languageId": 2,
   "levelId": 2,
   "subCategoryId": 3,
-  "professorId": 1
+  "professorKeycloakId": "56b79765-583b-4a42-8b05-c2d67fb11869"
 }
 ###
 GET http://localhost:7777/api/v1/courses?page=0&size=3
@@ -18,12 +18,12 @@ GET http://localhost:7777/api/v1/courses?page=0&size=3
 ###
 GET http://localhost:7777/api/v1/courses?page=0&size=3&title=Curso
 ###
-GET http://localhost:7777/api/v1/courses?page=1&size=3&languageId=1
+GET http://localhost:7777/api/v1/courses?page=0&size=3&languageId=1
 ###
 
-GET http://localhost:7777/api/v1/courses?page=1&size=3&levelId=2
+GET http://localhost:7777/api/v1/courses?page=0&size=3&levelId=2
 ###
-GET http://localhost:7777/api/v1/courses?page=1&size=3&categoryId=1
+GET http://localhost:7777/api/v1/courses?page=0&size=3&categoryId=1
 
 ###
 GET http://localhost:7777/api/v1/courses/professor/d4ab900f-3fe0-44ba-aacd-4ad74a7738ce
