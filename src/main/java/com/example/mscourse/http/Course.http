@@ -2,7 +2,7 @@ POST http://localhost:7777/api/v1/courses
 Content-Type: application/json
 
 {
-  "title": "Angular 1000",
+  "title": "Angular 51sdasd",
   "description": "Descripción del curso",
   "amount": 99.99,
   "version": 1,

@@ -24,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class CourseApi {
     @Autowired
     private CourseBl courseBl;

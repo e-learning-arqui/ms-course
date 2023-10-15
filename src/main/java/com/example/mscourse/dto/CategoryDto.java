@@ -12,7 +12,7 @@ public class CategoryDto {
     }
 
     // getters setters y to string
-    public Long getCategoryIdId() {return categoryId;}
+    public Long getCategoryId() {return categoryId;}
 
     public void setCategoryId(Long categoryId) {this.categoryId = categoryId;}
 
