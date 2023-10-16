@@ -2,7 +2,9 @@ package com.example.mscourse.bl;
 import com.example.mscourse.dao.ProfessorRepository;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.entity.*;
+import com.example.mscourse.service.FileService;
 import com.example.mscourse.specifications.CourseSpecification;
+import jakarta.ws.rs.core.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CourseBl {
@@ -20,9 +23,15 @@ public class CourseBl {
     private CourseRepository courseRepository;
     @Autowired
     private ProfessorRepository professorRepository;
+
+    @Autowired
+    private FileService fileService;
     private final Logger log = LoggerFactory.getLogger(CourseBl.class);
 
-    public void saveCourse(CourseDto courseDto){
+
+
+    public Long saveCourse(CourseDto courseDto){
+
         log.info("Saving course");
         log.info("Finding professor by professorId: " + courseDto.getProfessorKeycloakId());
         ProfessorEntity professor = professorRepository.getProfessorByProfessorKeycloakId(courseDto.getProfessorKeycloakId());
@@ -50,10 +59,11 @@ public class CourseBl {
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
         courseEntity.setProfessorId(professor);
-        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId()
-             );
+        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId());
 
         courseRepository.saveAndFlush(courseEntity);
+        Long courseId = courseEntity.getCourseId();
+        return courseId;
     }
 
 
@@ -102,8 +112,13 @@ public class CourseBl {
         courseDto.setLanguageId(courseEntity.getLanguageId().getId());
         courseDto.setLevelId(courseEntity.getLevelId().getId());
         courseDto.setSubCategoryId(courseEntity.getSubCategoryId().getId());
-
+        System.out.println("URL: " + url(courseEntity.getTitle()));
+        courseDto.setLogoUrl(url(courseEntity.getTitle()));
         return courseDto;
+    }
+
+    private String url(String courseName){
+        return this.fileService.getUrlLogo(courseName).getBody().toString();
     }
 
 
