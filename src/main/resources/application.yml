@@ -1,14 +1,14 @@
 server:
-  port: 7777
+  port: 8972
 
 spring:
   application:
     name: ms-course
   datasource:
     #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
-    url: jdbc:postgresql://localhost:5432/cognito-hub
+    url: jdbc:postgresql://localhost:5432/cognito
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:admin}
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

@@ -16,7 +16,7 @@ public class SubCategoryBl {
     @Autowired
     private SubCategoryRepository subCategoryRepository;
     public List<SubCategoryDto> findAllSubCategoriesByCategoryId(Long idCategory){
-        List<SubCategoryDto> subCategoryDtoList = new ArrayList<>();
+            List<SubCategoryDto> subCategoryDtoList = new ArrayList<>();
         List<SubCategoryEntity> subCategoryEntityList = this.subCategoryRepository.findAllSubCategoriesByCategoryId(idCategory);
         for (SubCategoryEntity subCategoryEntity : subCategoryEntityList) {
             CategoryEntity categoryEntity = subCategoryEntity.getCategoryId();

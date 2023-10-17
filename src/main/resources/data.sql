@@ -85,3 +85,10 @@ VALUES
     ('Inicial', 'Para quienes tienen una comprensión básica y buscan consolidar fundamentos.'),
     ('Medio', 'Para quienes ya tienen una buena base y buscan profundizar en el tema.'),
     ('Avanzado', 'Para quienes ya tienen un dominio considerable y buscan especializarse o perfeccionarse.');
+-- SUBSCRIPTION_TYPE
+INSERT INTO SUBSCRIPTION_TYPE (SUBSCRIPTION_TYPE, PRICE, DURATION, DESCRIPTION)
+VALUES
+    ('Free tryal', 0.00, 'WK', 'Full access for 1 week.'),
+    ('1 Month Pass', 19.99, 'MTH', 'Full access for 1 month.'),
+    ('3 Month Pass', 49.99, 'QTR', 'Full access for 3 months.'),
+    ('Annual Pass', 199.99, 'YR', 'Full access for 1 year.');

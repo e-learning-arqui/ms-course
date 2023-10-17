@@ -50,8 +50,7 @@ public class CourseBl {
         courseEntity.setLevelId(levelEntity);
         courseEntity.setSubCategoryId(subCategoryEntity);
         courseEntity.setProfessorId(professor);
-        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId()
-             );
+        log.info("Saving course with title: " + courseEntity.getTitle() + " and professorId: " + courseDto.getProfessorKeycloakId());
 
         courseRepository.saveAndFlush(courseEntity);
     }
