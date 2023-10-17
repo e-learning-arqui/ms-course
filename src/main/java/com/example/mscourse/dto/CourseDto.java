@@ -13,13 +13,15 @@ public class CourseDto {
     private Long subCategoryId;
     private String professorKeycloakId;
 
+    private String logoUrl;
+
     // Constructor vacío
     public CourseDto() {
     }
 
     // Constructor con valores
     public CourseDto(String title, String description, BigDecimal amount, int version, int duration, Long languageId, Long levelId,
-                     Long subCategoryId, String professorKeycloakIdId) {
+                     Long subCategoryId, String professorKeycloakIdId, String logoUrl) {
         this.title = title;
         this.description = description;
         this.amount = amount;
@@ -29,9 +31,15 @@ public class CourseDto {
         this.levelId = levelId;
         this.subCategoryId = subCategoryId;
         this.professorKeycloakId = professorKeycloakIdId;
+        this.logoUrl = logoUrl;
     }
 
     // Getters
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -100,7 +108,11 @@ public class CourseDto {
         this.subCategoryId = subCategoryId;
     }
 
-public void setProfessorKeycloakId(String professorKeycloakId) {
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public void setProfessorKeycloakId(String professorKeycloakId) {
         this.professorKeycloakId = professorKeycloakId;
     }
     // Método toString

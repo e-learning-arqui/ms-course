@@ -5,6 +5,7 @@ import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
 import com.example.mscourse.dto.SectionDto;
 import com.example.mscourse.service.FileService;
+import feign.Request;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.rmi.ServerException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -36,14 +38,17 @@ public class CourseApi {
     private FileService fileService;
 
     @PostMapping("/courses")
-    public ResponseDto<String> createCourse(@RequestBody CourseDto courseDto) {
+    public ResponseDto<Long> createCourse(
+            @RequestBody CourseDto courseDto
+            ) {
 
         System.out.println("courseDto: " + courseDto.toString());
-        ResponseDto<String> response = new ResponseDto<>();
+        ResponseDto<Long> response = new ResponseDto<>();
+
         try {
-            courseBl.saveCourse(courseDto);
+
             response.setCode("0000");
-            response.setResponse("Course created successfully");
+            response.setResponse(courseBl.saveCourse(courseDto));
             return response;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -52,6 +57,28 @@ public class CourseApi {
             return response;
         }
 
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/courses/logo")
+    public ResponseDto<String> uploadLogo(@RequestParam("file") MultipartFile file,
+                                          @RequestParam("bucketName") String bucketName,
+                                          @RequestParam("courseName") String courseName) {
+        ResponseDto<String> response = new ResponseDto<>();
+        System.out.println("courseName: " + courseName);
+        try {
+
+            fileService.uploadLogo(file, bucketName, courseName);
+            response.setCode("0000");
+            response.setResponse("Logo uploaded successfully");
+
+            return response;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return response;
+        }
     }
 
 
