@@ -26,6 +26,9 @@ public class CourseBl {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private SubCategoryBl subCategoryBl;
     private final Logger log = LoggerFactory.getLogger(CourseBl.class);
 
 
@@ -43,7 +46,7 @@ public class CourseBl {
         levelEntity.setId(courseDto.getLevelId());
 
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
-        subCategoryEntity.setId(courseDto.getSubCategoryId());
+        //subCategoryEntity.setId(courseDto.getSubCategoryId());
 
 
         courseEntity.setTitle(courseDto.getTitle());
@@ -84,6 +87,7 @@ public class CourseBl {
         //spec = spec.and(CourseSpecification.orderByTitle());
 
         Page<CourseEntity> courseEntityPage = courseRepository.findAll(spec,pageable);
+
         return courseEntityPage.map(this::convertToCourseDto);
     }
 
@@ -102,6 +106,7 @@ public class CourseBl {
     }
 
     private CourseDto convertToCourseDto(CourseEntity courseEntity){
+        String subCategoryName = subCategoryBl.findSubCategoryNameById(courseEntity.getSubCategoryId().getId());
         CourseDto courseDto = new CourseDto();
         courseDto.setTitle(courseEntity.getTitle());
         courseDto.setDescription(courseEntity.getDescription());
@@ -109,7 +114,7 @@ public class CourseBl {
         courseDto.setDuration(courseEntity.getDuration());
         courseDto.setLanguageId(courseEntity.getLanguageId().getId());
         courseDto.setLevelId(courseEntity.getLevelId().getId());
-        courseDto.setSubCategoryId(courseEntity.getSubCategoryId().getId());
+        courseDto.setSubCategoryName(subCategoryName);
         System.out.println("URL: " + url(courseEntity.getTitle()));
         courseDto.setLogoUrl(url(courseEntity.getTitle()));
         return courseDto;

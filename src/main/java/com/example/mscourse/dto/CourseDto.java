@@ -9,7 +9,7 @@ public class CourseDto {
     private int duration;
     private Long languageId;
     private Long levelId;
-    private Long subCategoryId;
+    private String subCategoryName;
     private String professorKeycloakId;
 
     private String logoUrl;
@@ -19,18 +19,32 @@ public class CourseDto {
     }
 
     // Constructor con valores
-    public CourseDto(String title, String description,  int version, int duration, Long languageId, Long levelId,
-                     Long subCategoryId, String professorKeycloakIdId, String logoUrl) {
+
+    public CourseDto(String title, String description, int version, int duration, Long languageId, Long levelId, String subCategoryName, String professorKeycloakId, String logoUrl) {
         this.title = title;
         this.description = description;
         this.version = version;
         this.duration = duration;
         this.languageId = languageId;
         this.levelId = levelId;
-        this.subCategoryId = subCategoryId;
-        this.professorKeycloakId = professorKeycloakIdId;
+        this.subCategoryName = subCategoryName;
+        this.professorKeycloakId = professorKeycloakId;
         this.logoUrl = logoUrl;
     }
+
+//    public CourseDto(String title, String description, BigDecimal amount, int version, int duration, Long languageId, Long levelId,
+//                     Long subCategoryId, String professorKeycloakIdId, String logoUrl) {
+//        this.title = title;
+//        this.description = description;
+//        this.amount = amount;
+//        this.version = version;
+//        this.duration = duration;
+//        this.languageId = languageId;
+//        this.levelId = levelId;
+//        this.subCategoryId = subCategoryId;
+//        this.professorKeycloakId = professorKeycloakIdId;
+//        this.logoUrl = logoUrl;
+//    }
 
     // Getters
 
@@ -63,9 +77,6 @@ public class CourseDto {
         return levelId;
     }
 
-    public Long getSubCategoryId() {
-        return subCategoryId;
-    }
 
     public String getProfessorKeycloakId() {
         return professorKeycloakId;
@@ -96,12 +107,17 @@ public class CourseDto {
         this.levelId = levelId;
     }
 
-    public void setSubCategoryId(Long subCategoryId) {
-        this.subCategoryId = subCategoryId;
-    }
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public String getSubCategoryName() {
+        return subCategoryName;
+    }
+
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 
     public void setProfessorKeycloakId(String professorKeycloakId) {
@@ -117,7 +133,7 @@ public class CourseDto {
                 ", duration=" + duration +
                 ", languageId=" + languageId +
                 ", levelId=" + levelId +
-                ", subCategoryId=" + subCategoryId +
+                ", subCategoryId=" + subCategoryName +
                 ", professorId=" + professorKeycloakId +
                 '}';
     }

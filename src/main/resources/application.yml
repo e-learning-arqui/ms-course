@@ -1,6 +1,5 @@
 server:
-  port: 7200
-
+  port: 6666
 spring:
   application:
     name: ms-course
