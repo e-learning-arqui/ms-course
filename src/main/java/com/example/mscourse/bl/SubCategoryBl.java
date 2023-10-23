@@ -29,5 +29,11 @@ public class SubCategoryBl {
         return subCategoryDtoList;
     }
 
+    public String findSubCategoryNameById(Long idSubCategory){
+        SubCategoryEntity subCategoryEntity = this.subCategoryRepository.findById(idSubCategory).orElse(null);
+        assert subCategoryEntity != null;
+        return subCategoryEntity.getSubCategoryName();
+    }
+
 
 }
