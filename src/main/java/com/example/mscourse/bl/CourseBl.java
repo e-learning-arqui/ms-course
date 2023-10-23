@@ -1,5 +1,6 @@
 package com.example.mscourse.bl;
 import com.example.mscourse.dao.ProfessorRepository;
+import com.example.mscourse.dao.SubCategoryRepository;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.entity.*;
 import com.example.mscourse.service.FileService;
@@ -25,6 +26,9 @@ public class CourseBl {
     private ProfessorRepository professorRepository;
 
     @Autowired
+    private SubCategoryRepository subCategoryRepository;
+
+    @Autowired
     private FileService fileService;
 
     @Autowired
@@ -46,7 +50,7 @@ public class CourseBl {
         levelEntity.setId(courseDto.getLevelId());
 
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
-        //subCategoryEntity.setId(courseDto.getSubCategoryId());
+        subCategoryEntity = subCategoryRepository.findBySubCategoryName(courseDto.getSubCategoryName());
 
 
         courseEntity.setTitle(courseDto.getTitle());
