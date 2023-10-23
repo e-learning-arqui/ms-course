@@ -52,7 +52,6 @@ public class CourseBl {
         courseEntity.setDescription(courseDto.getDescription());
         // HACER ALGUNA ESPECIE DE Procedimiento almacenado que actualice el lastUpdate
         courseEntity.setLastUpdate(new Date());
-        courseEntity.setAmount(courseDto.getAmount());
         courseEntity.setVersion(courseDto.getVersion());
         courseEntity.setDuration(courseDto.getDuration());
         courseEntity.setLanguageId(languageEntity);
@@ -106,7 +105,6 @@ public class CourseBl {
         CourseDto courseDto = new CourseDto();
         courseDto.setTitle(courseEntity.getTitle());
         courseDto.setDescription(courseEntity.getDescription());
-        courseDto.setAmount(courseEntity.getAmount());
         courseDto.setVersion(courseEntity.getVersion());
         courseDto.setDuration(courseEntity.getDuration());
         courseDto.setLanguageId(courseEntity.getLanguageId().getId());

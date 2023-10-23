@@ -16,7 +16,7 @@ Content-Type: application/json
 GET http://localhost:7777/api/v1/courses?page=0&size=15
 
 ###
-GET http://localhost:7777/api/v1/courses?page=0&size=3&title=Curso
+GET http://localhost:7777/api/v1/courses?page=0&size=3&title=Curso&languageId=1&levelId=2&categoryId=1
 ###
 GET http://localhost:7777/api/v1/courses?page=0&size=3&languageId=1
 ###

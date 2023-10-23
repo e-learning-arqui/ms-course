@@ -28,9 +28,6 @@ public class CourseEntity {
     @Column(name = "LAST_UPDATE", nullable = false)
     private Date lastUpdate;
 
-    @Column(name = "AMOUNT", nullable = false, precision = 8, scale = 2)
-    private BigDecimal amount;
-
     @Column(name = "VERSION", nullable = false)
     private int version;
 
@@ -54,14 +51,13 @@ public class CourseEntity {
     public CourseEntity() {}
 
     public CourseEntity(String title, Date startDate, boolean status, String description, Date lastUpdate,
-                        BigDecimal amount, int version, int duration, LanguageEntity languageId,
+                        int version, int duration, LanguageEntity languageId,
                         LevelEntity levelId, SubCategoryEntity subCategoryId, ProfessorEntity professorId ) {
         this.title = title;
         this.startDate = startDate;
         this.status = status;
         this.description = description;
         this.lastUpdate = lastUpdate;
-        this.amount = amount;
         this.version = version;
         this.duration = duration;
         this.languageId = languageId;
@@ -128,13 +124,6 @@ public class CourseEntity {
         this.lastUpdate = lastUpdate;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
 
     public int getVersion() {
         return version;
@@ -185,7 +174,6 @@ public class CourseEntity {
                 ", status=" + status +
                 ", description='" + description + '\'' +
                 ", lastUpdate=" + lastUpdate +
-                ", amount=" + amount +
                 ", version=" + version +
                 ", duration=" + duration +
                 ", languageId=" + languageId +
