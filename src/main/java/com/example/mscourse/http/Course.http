@@ -2,18 +2,18 @@ POST http://localhost:7777/api/v1/courses
 Content-Type: application/json
 
 {
-  "title": "Angular 51sdasd",
-  "description": "Descripción del curso",
-  "amount": 99.99,
-  "version": 1,
-  "duration": 30,
+  "title": "Curso nuevo",
+  "description": "Descripción del curso 3",
+  "amount": 10.2,
+  "version": 2,
+  "duration": 31,
   "languageId": 2,
   "levelId": 2,
   "subCategoryId": 3,
-  "professorKeycloakId": "56b79765-583b-4a42-8b05-c2d67fb11869"
+  "professorKeycloakId": "d4ab900f-3fe0-44ba-aacd-4ad74a7738ce"
 }
 ###
-GET http://localhost:7777/api/v1/courses?page=0&size=3
+GET http://localhost:7777/api/v1/courses?page=0&size=15
 
 ###
 GET http://localhost:7777/api/v1/courses?page=0&size=3&title=Curso
