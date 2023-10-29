@@ -6,9 +6,9 @@ spring:
     name: ms-course
   datasource:
     #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
-    url: jdbc:postgresql://localhost:5432/cognito-hub
+    url: jdbc:postgresql://localhost:5432/cognito
     username: ${DB_USERNAME:postgres}
-    password: admin
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -29,9 +29,6 @@ management:
     sampling:
       probability: 1.0
 
-logging:
-  pattern:
-    level: "%5p [${spring.application.name}, %X{traceId:-},%X{spanId:-}]"
 keycloak:
   auth-server-url: http://localhost:8080
   credentials:
