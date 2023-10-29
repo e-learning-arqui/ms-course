@@ -4,6 +4,7 @@ import com.example.mscourse.bl.SectionBl;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
 import com.example.mscourse.dto.SectionDto;
+import com.example.mscourse.dto.builder.CourseDtoBuilder;
 import com.example.mscourse.service.FileService;
 import feign.Request;
 import org.apache.coyote.Response;
@@ -83,7 +84,7 @@ public class CourseApi {
 
 
     @GetMapping("/courses")
-    public ResponseDto<Page<CourseDto>> getAllCourses(
+    public ResponseDto<Page<CourseDtoBuilder>> getAllCourses(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(required = false) String title,
@@ -91,10 +92,11 @@ public class CourseApi {
             @RequestParam(required = false) Integer categoryId,
             @RequestParam(required = false) Integer levelId
     ) {
-        ResponseDto<Page<CourseDto>> response = new ResponseDto<>();
+        ResponseDto<Page<CourseDtoBuilder>> response = new ResponseDto<>();
         Pageable pageable = PageRequest.of(page, size);
         try {
-            Page<CourseDto> CouseDtoPage = courseBl.findAllCourses(pageable, title, languageId, categoryId, levelId);
+            Page<CourseDtoBuilder> CouseDtoPage = courseBl.findAllCourses
+                    (pageable, title, languageId, categoryId, levelId, true);
             response.setCode("0000");
             response.setResponse(CouseDtoPage);
             return response;
@@ -108,10 +110,10 @@ public class CourseApi {
     }
 
     @GetMapping("/courses/{id}")
-    public ResponseDto<CourseDto> getCourseById(@PathVariable Long id) {
-        ResponseDto<CourseDto> response = new ResponseDto<>();
+    public ResponseDto<CourseDtoBuilder> getCourseById(@PathVariable Long id) {
+        ResponseDto<CourseDtoBuilder> response = new ResponseDto<>();
         try {
-            CourseDto courseDto = courseBl.findById(id);
+            CourseDtoBuilder courseDto = courseBl.findById(id);
             response.setCode("0000");
             response.setResponse(courseDto);
             return response;

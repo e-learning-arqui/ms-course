@@ -1,14 +1,14 @@
 server:
-  port: 8972
+  port: 7777
 
 spring:
   application:
     name: ms-course
   datasource:
     #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
-    url: jdbc:postgresql://localhost:5432/cognito
+    url: jdbc:postgresql://localhost:5432/cognito-hub
     username: ${DB_USERNAME:postgres}
-    password: 1234
+    password: admin
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -23,3 +23,17 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name}, %X{traceId:-},%X{spanId:-}]"
+keycloak:
+  auth-server-url: http://localhost:8080
+  credentials:
+    secret: xLnnPpvGRBkekbUuVLnnudrkSVDTCzFc
+    realm: cognito-hub
