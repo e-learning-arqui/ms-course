@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 public class CourseDto {
     private String title;
     private String description;
-    private BigDecimal amount;
     private int version;
     private int duration;
     private Long languageId;
@@ -21,10 +20,9 @@ public class CourseDto {
 
     // Constructor con valores
 
-    public CourseDto(String title, String description, BigDecimal amount, int version, int duration, Long languageId, Long levelId, String subCategoryName, String professorKeycloakId, String logoUrl) {
+    public CourseDto(String title, String description, int version, int duration, Long languageId, Long levelId, String subCategoryName, String professorKeycloakId, String logoUrl) {
         this.title = title;
         this.description = description;
-        this.amount = amount;
         this.version = version;
         this.duration = duration;
         this.languageId = languageId;
@@ -62,9 +60,6 @@ public class CourseDto {
         return description;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
 
     public int getVersion() {
         return version;
@@ -95,9 +90,6 @@ public class CourseDto {
         this.description = description;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
 
     public void setVersion(int version) {
         this.version = version;
@@ -137,7 +129,6 @@ public class CourseDto {
         return "CourseDto{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", amount=" + amount +
                 ", version=" + version +
                 ", duration=" + duration +
                 ", languageId=" + languageId +

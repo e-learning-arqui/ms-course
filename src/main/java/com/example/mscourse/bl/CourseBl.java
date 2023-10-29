@@ -71,7 +71,6 @@ public class CourseBl {
         courseEntity.setDescription(courseDto.getDescription());
         // HACER ALGUNA ESPECIE DE Procedimiento almacenado que actualice el lastUpdate
         courseEntity.setLastUpdate(new Date());
-        courseEntity.setAmount(courseDto.getAmount());
         courseEntity.setVersion(courseDto.getVersion());
         courseEntity.setDuration(courseDto.getDuration());
         courseEntity.setLanguageId(languageEntity);
@@ -132,7 +131,7 @@ public class CourseBl {
         CourseDtoBuilder.Builder builder = new CourseDtoBuilder.Builder()
                 .withTitle(courseEntity.getTitle())
                 .withDescription(courseEntity.getDescription())
-                .withAmount(courseEntity.getAmount())
+
                 .withVersion(courseEntity.getVersion())
                 .withDuration(courseEntity.getDuration())
                 .withLanguageId(courseEntity.getLanguageId().getId())
@@ -145,10 +144,10 @@ public class CourseBl {
         }
 
         return builder.build();
+
     }
 
     private String url(String courseName){
-
 
         return this.fileService.getUrlLogo(
                 courseName).getBody();
