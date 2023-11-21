@@ -1,17 +1,15 @@
 package com.example.mscourse.service;
 
+import com.example.mscourse.config.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@FeignClient(name = "ms-files")
+@FeignClient(name = "ms-files", configuration = FeignConfig.class)
 public interface FileService {
 
     @PostMapping("/api/v1/files")
@@ -26,6 +24,7 @@ public interface FileService {
 
     @GetMapping("/api/v1/files/url/logo")
     ResponseEntity<String> getUrlLogo(
+//            @RequestHeader("Authorization") String token,
             @RequestParam String courseName);
 
 
