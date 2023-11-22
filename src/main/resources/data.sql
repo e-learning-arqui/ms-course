@@ -92,3 +92,9 @@ VALUES
     ('1 Month Pass', 19.99, 'MTH', 'Full access for 1 month.'),
     ('3 Month Pass', 49.99, 'QTR', 'Full access for 3 months.'),
     ('Annual Pass', 199.99, 'YR', 'Full access for 1 year.');
+INSERT INTO ASSIGNMENT_TYPE (DESCRIPTION)
+VALUES
+    ('EXAMEN'),
+    ('CUESTIONARIO'),
+    ('TAREA');
+
