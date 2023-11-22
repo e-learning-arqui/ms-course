@@ -15,6 +15,7 @@ import com.example.mscourse.dao.CourseRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
@@ -148,7 +149,13 @@ public class CourseBl {
     }
 
     private String url(String courseName){
-
+//        Map<String, String> data = Map.of(
+//                "grant_type", "client_credentials",
+//                "client_id", "backend",
+//                "client_secret", clientSecret
+//        );
+//        String token = "Bearer " + keycloakService.getToken(data).get("access_token");
+//        log.info("token: {}", token);
         return this.fileService.getUrlLogo(
                 courseName).getBody();
     }
