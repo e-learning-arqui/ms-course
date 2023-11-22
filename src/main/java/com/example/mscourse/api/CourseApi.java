@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.rmi.ServerException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -161,7 +162,7 @@ public class CourseApi {
     public ResponseEntity<ResponseDto<String>> createSection(@PathVariable Long id, @RequestBody SectionDto sectionDto) {
         ResponseDto<String> response = new ResponseDto<>();
         try {
-            sectionBl.saveSection(sectionDto);
+            sectionBl.saveSection(sectionDto, id);
             response.setCode("0000");
             response.setResponse("Section created successfully");
             return ResponseEntity.ok(response);
@@ -172,6 +173,61 @@ public class CourseApi {
             return ResponseEntity.badRequest().body(response);
         }
     }
+
+    @PutMapping("/sections/{id}/status")
+    public ResponseEntity<ResponseDto<String>> updateSectionStatus(@PathVariable Long id) {
+        ResponseDto<String> response = new ResponseDto<>();
+        try {
+            sectionBl.deleteSection(id);
+            response.setCode("0000");
+            response.setResponse("Section status updated successfully");
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+
+    @GetMapping("/courses/{id}/sections")
+    public ResponseEntity<ResponseDto<List<SectionDto>>> getSectionsByCourseId(
+            @PathVariable Long id
+    ) {
+        ResponseDto<List<SectionDto>> response = new ResponseDto<>();
+        try {
+            List<SectionDto> sectionDtoList = sectionBl.getSectionsByCourseId(id);
+            response.setCode("0000");
+            response.setResponse(sectionDtoList);
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+    @GetMapping("/courses/sections")
+    public ResponseEntity<ResponseDto<List<SectionDto>>> getAllSections() {
+        ResponseDto<List<SectionDto>> response = new ResponseDto<>();
+        try {
+            List<SectionDto> sectionDtoList = sectionBl.findAllSections();
+            response.setCode("0000");
+            response.setResponse(sectionDtoList);
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
 
     @PostMapping("courses/classes/{id}/files")
     public ResponseEntity<String> uploadFile(

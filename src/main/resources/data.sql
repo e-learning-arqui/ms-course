@@ -92,3 +92,9 @@ VALUES
     ('Ruso'),
     ('Japonés'),
     ('Panyabí');
+INSERT INTO ASSIGNMENT_TYPE (DESCRIPTION)
+VALUES
+    ('EXAMEN'),
+    ('CUESTIONARIO'),
+    ('TAREA');
+
