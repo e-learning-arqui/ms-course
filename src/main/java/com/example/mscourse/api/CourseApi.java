@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.rmi.ServerException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -183,6 +184,22 @@ public class CourseApi {
         fileService.uploadFile(file, bucketName, classId);
 
         return ResponseEntity.ok("File uploaded successfully");
+    }
+    @GetMapping("/courses/{id}/sections")
+    public ResponseDto<List<SectionDto>> getSectionsByCourseId(@PathVariable Long id) {
+        ResponseDto<List<SectionDto>> response = new ResponseDto<>();
+        try {
+            List<SectionDto> sectionDtoList = sectionBl.getSectionsByCourseId(id);
+            response.setCode("0000");
+            response.setResponse(sectionDtoList);
+            return response;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return response;
+        }
+
     }
 }
 
