@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -32,9 +33,13 @@ public class ClassBl {
         this.sectionRepository = sectionRepository;
     }
 
-    public void saveClass(ClassDto classDto, Long sectionId) {
+    public Long saveClass(ClassDto classDto) {
         log.info("Saving class: " + classDto.getTitle() + " in database");
-        SectionEntity section = sectionRepository.findById(sectionId).get();
+        log.info("title: " + classDto.getTitle());
+        log.info("description: " + classDto.getDescription());
+        log.info("duration: " + classDto.getDuration());
+
+        SectionEntity section = sectionRepository.findById(classDto.getSectionId()).get();
         Date date = new Date();
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
         ClassEntity classEntity = new ClassEntity();
@@ -43,7 +48,10 @@ public class ClassBl {
         classEntity.setSectionId(section);
         classEntity.setDuration(classDto.getDuration());
         classEntity.setStartDate(date);
-        classRepository.save(classEntity);
+        //classRepository.save(classEntity);
+        ClassEntity savedClass = classRepository.save(classEntity);
+        return savedClass.getClassId();
+        //return new class id
     }
 
     public Page<ClassDto> getClassesByCourseId(Long courseId, Integer page, Integer size) {
@@ -63,5 +71,27 @@ public class ClassBl {
         return classDto;
     }
 
+    public ClassDto getClassById(Long classId) {
+        ClassEntity classEntity = classRepository.findById(classId).orElse(null);
+        assert classEntity != null;
+        return convertToDto(classEntity);
+    }
+
+    public List<ClassDto> findClassesBySectionId(Long sectionId){
+        List<ClassEntity> classEntities = classRepository.getClassesBySectionId(sectionId);
+        if(classEntities.isEmpty()){
+            return null;
+        }
+        return classEntities.stream().map(this::convertToDto).toList();
+    }
+
+
+    public List<ClassDto> classesByCourseId(Long courseId){
+        List<ClassEntity> classEntities = classRepository.classesByCourseId(courseId);
+        if(classEntities.isEmpty()){
+            return null;
+        }
+        return classEntities.stream().map(this::convertToDto).toList();
+    }
 
 }

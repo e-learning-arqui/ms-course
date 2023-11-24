@@ -174,6 +174,7 @@ public class CourseApi {
         }
     }
 
+
     @PutMapping("/sections/{id}/status")
     public ResponseEntity<ResponseDto<String>> updateSectionStatus(@PathVariable Long id) {
         ResponseDto<String> response = new ResponseDto<>();

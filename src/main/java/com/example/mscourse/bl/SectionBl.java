@@ -27,8 +27,6 @@ public class SectionBl {
         sectionEntity.setCourseId(course);
         sectionEntity.setStatus(true);
         sectionRepository.save(sectionEntity);
-
-
     }
 
     public List<SectionDto> getSectionsByCourseId(Long id){

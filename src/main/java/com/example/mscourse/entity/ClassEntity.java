@@ -11,6 +11,7 @@ public class ClassEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_id")
     private Long classId;
 
     @ManyToOne(fetch = FetchType.LAZY)
