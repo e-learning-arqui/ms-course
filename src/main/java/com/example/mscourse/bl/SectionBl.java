@@ -8,6 +8,8 @@ import com.example.mscourse.entity.SectionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -29,6 +31,7 @@ public class SectionBl {
         sectionRepository.save(sectionEntity);
     }
 
+    //obtener las secciones por id
     public List<SectionDto> getSectionsByCourseId(Long id){
         List<SectionEntity> sectionEntities = sectionRepository.findByCourseId(id);
         if(sectionEntities.isEmpty()){
