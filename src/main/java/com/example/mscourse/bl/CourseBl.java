@@ -1,6 +1,5 @@
 package com.example.mscourse.bl;
-import com.example.mscourse.dao.ProfessorRepository;
-import com.example.mscourse.dao.SubCategoryRepository;
+import com.example.mscourse.dao.*;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.builder.CourseDtoBuilder;
 import com.example.mscourse.entity.*;
@@ -11,7 +10,6 @@ import jakarta.ws.rs.core.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.mscourse.dao.CourseRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,18 +28,19 @@ public class CourseBl {
     private CourseRepository courseRepository;
     @Autowired
     private ProfessorRepository professorRepository;
-
     @Autowired
     private SubCategoryRepository subCategoryRepository;
-
     @Autowired
     private FileService fileService;
-
     @Autowired
     private SubCategoryBl subCategoryBl;
-
     @Autowired
     private KeycloakService keycloakService;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private CourseStudentRepository courseStudentRepository;
+
 
     @Value("${keycloak.credentials.secret}")
     private String clientSecret;
@@ -158,6 +157,19 @@ public class CourseBl {
 //        log.info("token: {}", token);
         return this.fileService.getUrlLogo(
                 courseName).getBody();
+    }
+
+    public void addCourseStudent(String keycloakId, Long courseId){
+        CourseStudentEntity courseStudent = new CourseStudentEntity();
+        Student student = studentRepository.findByKeycloakId(keycloakId);
+
+        CourseEntity courseEntity = courseRepository.findByCourseId(courseId);
+
+        courseStudent.setCourseId(courseEntity);
+        courseStudent.setUserId(student);
+        courseStudent.setStatus(true);
+
+        courseRepository.save(courseEntity);
     }
 
 

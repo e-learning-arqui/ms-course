@@ -28,3 +28,6 @@ GET http://localhost:7777/api/v1/courses?page=0&size=3&categoryId=1
 
 ###
 GET http://localhost:7777/api/v1/courses/professor/d4ab900f-3fe0-44ba-aacd-4ad74a7738ce
+
+###
+POST http://localhost:7777/api/v1/courses/8/students/784b69fb-4a65-49a9-a687-d931dcf83c9a

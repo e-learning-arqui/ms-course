@@ -13,15 +13,18 @@ public class CourseStudentEntity {
     @Column(name = "STATUS", nullable = false)
     private boolean status;
 
-    @Column(name = "COURSE_ID", nullable = false)
-    private Long courseId;
 
-    @Column(name = "USER_ID", nullable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", nullable = false, referencedColumnName = "user_id")
+    private Student userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false, referencedColumnName = "course_id")
+    private CourseEntity courseId;
 
     public CourseStudentEntity() {}
 
-    public CourseStudentEntity(boolean status, Long courseId, Long userId) {
+    public CourseStudentEntity(boolean status, CourseEntity courseId, Student userId) {
         this.status = status;
         this.courseId = courseId;
         this.userId = userId;
@@ -45,20 +48,21 @@ public class CourseStudentEntity {
         this.status = status;
     }
 
-    public Long getCourseId() {
-        return courseId;
-    }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
-
-    public Long getUserId() {
+    public Student getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Student userId) {
         this.userId = userId;
+    }
+
+    public CourseEntity getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(CourseEntity courseId) {
+        this.courseId = courseId;
     }
 
     @Override
