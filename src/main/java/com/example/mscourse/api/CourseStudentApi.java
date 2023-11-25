@@ -35,22 +35,17 @@ public class CourseStudentApi {
 
     }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/students/{keycloakId}")
     public ResponseEntity<ResponseDto<List<CourseDto>>> coursesTakenByStudent(
-            @PathVariable Long id
+            @PathVariable String keycloakId
     ) {
-       List<CourseEntity> courseIds = courseStudentBl.courseIdsTakenByStudent(id);
-         List<CourseDto> courseDtos = new ArrayList<>();
-        for (CourseEntity courseId : courseIds) {
-            CourseDto courseDto = new CourseDto();
-            courseDto.setId(courseId.getCourseId());
-            courseDto.setTitle(courseId.getTitle());
-            courseDtos.add(courseDto);
-    }
+       List<CourseDto> coursesTakenByStudent = courseStudentBl.courseIdsTakenByStudent(keycloakId);
+
+
 
         return ResponseEntity.ok(new ResponseDto<>("0000",
-                courseDtos,
-        "Courses taken by student"));
+                coursesTakenByStudent,
+        null));
 
     }
 

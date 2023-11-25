@@ -35,7 +35,7 @@ public class CourseBl {
     @Autowired
     private SubCategoryBl subCategoryBl;
     @Autowired
-    private KeycloakService keycloakService;
+    private ProgressRepository progressRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -147,7 +147,7 @@ public class CourseBl {
 
     }
 
-    private String url(String courseName){
+    public String url(String courseName){
 //        Map<String, String> data = Map.of(
 //                "grant_type", "client_credentials",
 //                "client_id", "backend",
@@ -167,14 +167,21 @@ public class CourseBl {
                 , courseEntity.getCourseId());
 
         if (existingCourseStudent != null) {
-
             return;
         }
+
 
         CourseStudentEntity courseStudent = new CourseStudentEntity();
         courseStudent.setCourseId(courseEntity);
         courseStudent.setUserId(student);
         courseStudent.setStatus(true);
+
+        ProgressEntity progressEntity = new ProgressEntity();
+        progressEntity.setCourseId(courseEntity);
+        progressEntity.setProgressPercent(0.0);
+        progressEntity.setActorId(student);
+        progressRepository.save(progressEntity);
+
 
         courseStudentRepository.save(courseStudent);
     }
