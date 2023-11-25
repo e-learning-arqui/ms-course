@@ -3,6 +3,7 @@ package com.example.mscourse.dto;
 import java.math.BigDecimal;
 
 public class CourseDto {
+    private Long id;
     private String title;
     private String description;
     private int version;
@@ -114,6 +115,14 @@ public class CourseDto {
 
     public String getSubCategoryName() {
         return subCategoryName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setSubCategoryName(String subCategoryName) {

@@ -17,6 +17,8 @@ public interface CourseRepository extends JpaRepository<CourseEntity, Long>, Jpa
 
     CourseEntity findByCourseId(Long courseId);
 
+    @Query(value = "SELECT c FROM CourseEntity c WHERE c.title = :title")
+    CourseEntity findByTitle(@Param("title") String title);
     @Query(value = "SELECT c FROM CourseEntity c WHERE c.professorId.professorId = :professorId")
     Page<CourseEntity> findByProfessorId(@Param("professorId") Long professorId, Pageable pageable);
 }

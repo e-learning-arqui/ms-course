@@ -159,17 +159,24 @@ public class CourseBl {
                 courseName).getBody();
     }
 
-    public void addCourseStudent(String keycloakId, Long courseId){
-        CourseStudentEntity courseStudent = new CourseStudentEntity();
+    public void addCourseStudent(String keycloakId, String courseTitle) {
         Student student = studentRepository.findByKeycloakId(keycloakId);
+        CourseEntity courseEntity = courseRepository.findByTitle(courseTitle);
 
-        CourseEntity courseEntity = courseRepository.findByCourseId(courseId);
+        CourseStudentEntity existingCourseStudent = courseStudentRepository.findByUserIdAndCourseId(student.getUserId()
+                , courseEntity.getCourseId());
 
+        if (existingCourseStudent != null) {
+
+            return;
+        }
+
+        CourseStudentEntity courseStudent = new CourseStudentEntity();
         courseStudent.setCourseId(courseEntity);
         courseStudent.setUserId(student);
         courseStudent.setStatus(true);
 
-        courseRepository.save(courseEntity);
+        courseStudentRepository.save(courseStudent);
     }
 
 
