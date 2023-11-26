@@ -185,6 +185,10 @@ public class CourseBl {
 
         courseStudentRepository.save(courseStudent);
     }
-
+    public CourseEntity findEntityById(Long courseId){
+        log.info("Finding course by id: " + courseId);
+        CourseEntity courseEntity = courseRepository.findByCourseId(courseId);
+        return courseEntity;
+    }
 
 }
