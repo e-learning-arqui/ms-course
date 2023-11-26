@@ -3,6 +3,8 @@ package com.example.mscourse.dto.builder;
 import java.math.BigDecimal;
 
 public class CourseDtoBuilder {
+    private Long id;
+
     private String title;
     private String description;
     private BigDecimal amount;
@@ -14,6 +16,7 @@ public class CourseDtoBuilder {
     private String professorKeycloakId;
     private String logoUrl;
 
+    private Double progressPercent;
 
     private CourseDtoBuilder(Builder builder){
         this.title = builder.title;
@@ -26,6 +29,8 @@ public class CourseDtoBuilder {
         this.subCategoryName = builder.subCategoryName;
         this.professorKeycloakId = builder.professorKeycloakId;
         this.logoUrl = builder.logoUrl;
+        this.progressPercent = builder.progressPercent;
+        this.id = builder.id;
     }
 
     public String getTitle() {
@@ -109,6 +114,7 @@ public class CourseDtoBuilder {
     }
 
     public static class Builder{
+        private Long id;
         private String title;
         private String description;
         private BigDecimal amount;
@@ -119,6 +125,7 @@ public class CourseDtoBuilder {
         private String subCategoryName;
         private String professorKeycloakId;
         private String logoUrl;
+        private Double progressPercent;
 
         public Builder(){}
 
@@ -169,6 +176,16 @@ public class CourseDtoBuilder {
 
         public Builder withLogoUrl(String logoUrl){
             this.logoUrl = logoUrl;
+            return this;
+        }
+
+        public Builder withProgressPercent(Double progressPercent){
+            this.progressPercent = progressPercent;
+            return this;
+        }
+
+        public Builder withId(Long id){
+            this.id = id;
             return this;
         }
 

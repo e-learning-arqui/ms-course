@@ -2,11 +2,16 @@ package com.example.mscourse.api;
 
 import com.example.mscourse.bl.CourseBl;
 import com.example.mscourse.bl.CourseStudentBl;
+import com.example.mscourse.dto.CourseAndProgressDto;
 import com.example.mscourse.dto.CourseDto;
 import com.example.mscourse.dto.ResponseDto;
+import com.example.mscourse.dto.builder.CourseDtoBuilder;
 import com.example.mscourse.entity.CourseEntity;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +41,18 @@ public class CourseStudentApi {
     }
 
     @GetMapping("/students/{keycloakId}")
-    public ResponseEntity<ResponseDto<List<CourseDto>>> coursesTakenByStudent(
+    public ResponseEntity<ResponseDto<Page<CourseAndProgressDto>>> coursesTakenByStudent(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Integer languageId,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) Integer levelId,
             @PathVariable String keycloakId
     ) {
-       List<CourseDto> coursesTakenByStudent = courseStudentBl.courseIdsTakenByStudent(keycloakId);
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<CourseAndProgressDto> coursesTakenByStudent = courseStudentBl.courseIdsTakenByStudent(pageable, keycloakId, languageId, levelId, categoryId, title);
 
 
 

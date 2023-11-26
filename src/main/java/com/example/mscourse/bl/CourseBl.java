@@ -176,11 +176,11 @@ public class CourseBl {
         courseStudent.setUserId(student);
         courseStudent.setStatus(true);
 
-        ProgressEntity progressEntity = new ProgressEntity();
-        progressEntity.setCourseId(courseEntity);
-        progressEntity.setProgressPercent(0.0);
-        progressEntity.setActorId(student);
-        progressRepository.save(progressEntity);
+//        ProgressEntity progressEntity = new ProgressEntity();
+//        progressEntity.setCourseId(courseEntity);
+//        progressEntity.setProgressPercent(0.0);
+//        progressEntity.setActorId(student);
+//        progressRepository.save(progressEntity);
 
 
         courseStudentRepository.save(courseStudent);

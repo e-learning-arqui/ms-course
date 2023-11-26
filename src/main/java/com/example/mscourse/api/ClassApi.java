@@ -56,6 +56,23 @@ public class ClassApi {
 
     }
 
+    @GetMapping("{courseId}/classes/count")
+    public ResponseEntity<ResponseDto<Integer>> countClassesByCourseId
+            (@PathVariable Long courseId) {
+        ResponseDto<Integer> response = new ResponseDto<>();
+        try {
+            Integer classes = classBl.countClassesByCourseId(courseId);
+            response.setCode("0000");
+            response.setResponse(classes);
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            response.setCode("9999");
+            response.setErrorMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+
+    }
+
     @GetMapping("/classes/{classId}")
     public ResponseEntity<ResponseDto<ClassDto>> getClassById(@PathVariable Long classId) {
         ResponseDto<ClassDto> response = new ResponseDto<>();

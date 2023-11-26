@@ -22,6 +22,6 @@ public class NotificationProducer {
     public String sendProgressNotification(String routingKey, ProgressMessageDto message) {
         log.info("Sending notification to queue");
         amqpTemplate.convertAndSend("topic-exchange", routingKey, message);
-        return "Notification sent to queue with routing key: " + routingKey + " and message: " + message.toString();
+        return "Notification sent to queue with routing key: " + routingKey + " and message: " + message.getUserKeyCloakId();
     }
 }

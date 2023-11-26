@@ -94,4 +94,7 @@ public class ClassBl {
         return classEntities.stream().map(this::convertToDto).toList();
     }
 
+    public Integer countClassesByCourseId(Long courseId){
+        return classRepository.countByCourseId(courseId);
+    }
 }

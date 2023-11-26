@@ -19,4 +19,7 @@ public interface ClassRepository extends JpaRepository<ClassEntity, Long> {
 
     @Query("SELECT c FROM ClassEntity c WHERE c.sectionId.courseId.courseId = :courseId")
     List<ClassEntity> classesByCourseId(@Param("courseId") Long courseId);
+
+    @Query("SELECT COUNT(c) FROM ClassEntity c WHERE c.sectionId.courseId.courseId = :courseId")
+    Integer countByCourseId(Long courseId);
 }

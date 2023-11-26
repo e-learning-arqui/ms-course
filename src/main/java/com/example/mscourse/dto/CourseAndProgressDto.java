@@ -1,8 +1,6 @@
 package com.example.mscourse.dto;
 
-import java.math.BigDecimal;
-
-public class CourseDto {
+public class CourseAndProgressDto {
     private Long id;
     private String title;
     private String description;
@@ -12,16 +10,20 @@ public class CourseDto {
     private Long levelId;
     private String subCategoryName;
     private String professorKeycloakId;
-
     private String logoUrl;
 
+    private Double progressPercent;
+
     // Constructor vacío
-    public CourseDto() {
+    public CourseAndProgressDto() {
     }
 
     // Constructor con valores
 
-    public CourseDto(String title, String description, int version, int duration, Long languageId, Long levelId, String subCategoryName, String professorKeycloakId, String logoUrl) {
+    public CourseAndProgressDto(String title, String description, int version,
+                                int duration, Long languageId, Long levelId,
+                                String subCategoryName, String professorKeycloakId, String logoUrl,
+                                Double progressPercent) {
         this.title = title;
         this.description = description;
         this.version = version;
@@ -31,6 +33,7 @@ public class CourseDto {
         this.subCategoryName = subCategoryName;
         this.professorKeycloakId = professorKeycloakId;
         this.logoUrl = logoUrl;
+        this.progressPercent = progressPercent;
     }
 
 
@@ -113,6 +116,14 @@ public class CourseDto {
         this.id = id;
     }
 
+    public Double getProgressPercent() {
+        return progressPercent;
+    }
+
+    public void setProgressPercent(Double progressPercent) {
+        this.progressPercent = progressPercent;
+    }
+
     public void setSubCategoryName(String subCategoryName) {
         this.subCategoryName = subCategoryName;
     }
@@ -134,4 +145,5 @@ public class CourseDto {
                 ", professorId=" + professorKeycloakId +
                 '}';
     }
+
 }

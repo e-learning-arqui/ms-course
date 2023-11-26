@@ -2,7 +2,8 @@ package com.example.mscourse.entity;
 
 import jakarta.persistence.*;
 
-@Entity(name = "progress")
+@Entity
+@Table(name = "progress")
 public class ProgressEntity {
 
     @Id
@@ -20,11 +21,14 @@ public class ProgressEntity {
     @JoinColumn(name = "actor_id", nullable = false, referencedColumnName = "user_id")
     private Student actorId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id", nullable = false, referencedColumnName = "class_id")
+    private ClassEntity classId;
 
     public ProgressEntity() {
     }
 
-    public ProgressEntity(Long progressId, CourseEntity courseId, Double progressPercent, Student actorId, ClassEntity classId) {
+    public ProgressEntity(Long progressId, CourseEntity courseId, Double progressPercent, Student actorId) {
         this.progressId = progressId;
         this.courseId = courseId;
         this.progressPercent = progressPercent;

@@ -1,7 +1,7 @@
 package com.example.mscourse.dto;
 
 public class SectionDto {
-    private Long sectionId;
+    private Long id;
     private Long courseId;
     private String title;
     private String description;
@@ -11,19 +11,19 @@ public class SectionDto {
     }
 
     public SectionDto(Long sectionId, Long courseId, String title, String description, Boolean status) {
-        this.sectionId = sectionId;
+        this.id = sectionId;
         this.courseId = courseId;
         this.title = title;
         this.description = description;
         this.status = status;
     }
 
-    public Long getSectionId() {
-        return sectionId;
+    public Long getId() {
+        return id;
     }
 
     public void setSectionId(Long sectionId) {
-        this.sectionId = sectionId;
+        this.id = sectionId;
     }
 
     public Long getCourseId() {

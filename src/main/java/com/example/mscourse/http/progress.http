@@ -5,5 +5,18 @@ Content-Type: application/json
 {
   "userKeyCloakId": "1a24bde3-0423-42b7-9e21-c567ae2b3363",
   "courseId": 8,
-  "classId": 12
+  "classId": 55
+}
+
+###
+
+POST http://localhost:7777/api/v1/courses/classes/progress?routingKey=progress.routingKey
+Content-Type: application/json
+
+{
+
+  "userKeyCloakId": "6752dfd7-a924-42d3-a4ae-5e15b9c599d5",
+  "courseId": 11,
+  "classId": 59
+
 }
