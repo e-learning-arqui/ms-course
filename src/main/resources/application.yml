@@ -14,7 +14,7 @@ spring:
     #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
     url: jdbc:postgresql://localhost:5432/cognito
     username: ${DB_USERNAME:postgres}
-    password: admin
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -56,4 +56,44 @@ token:
   converter:
     principal-attribute: preferred_username
     resource-id: cognito-hub
+security:
+  routes:
+    - path: /api/v1/courses/{id}/sections
+      method: POST
+      roles: [CREATE-COURSES]
+    - path: /api/v1/courses/{id}/sections
+      method: GET
+      roles: [CREATE-COURSES, VIEW-COURSES]
+    - path: /api/v1/sections/{id}/status
+      method: PUT
+      roles: [ CREATE-COURSES ]
+    - path: /api/v1/users/student/{userId}/subscription
+      method: GET
+      roles: [ VIEW-COURSES ]
+    - path: /api/v1/users/student/{userId}/subscription
+      method: POST
+      roles: [ VIEW-COURSES ]
+    - path: /api/v1/users/student/{userId}/subscription
+      method: PUT
+      roles: [ VIEW-COURSES ]
+    - path: /api/v1/courses/classes/{id}/files
+      method: POST
+      roles: [ CREATE-COURSES ]
+    - path: /api/v1/courses/sections/{id}/classes
+      method: POST
+      roles: [ CREATE-COURSES ]
+    - path: /api/v1/courses/students/{keycloakId}
+      method: GET
+      roles: [ VIEW-CONTENT ]
+    - path: /api/v1/courses/students/{keycloakId}
+      method: POST
+      roles: [ VIEW-CONTENT]
+    - path: /api/v1/category/**
+      roles: []
+    - path: /api/v1/courses
+      roles: []
+    - path: /api/v1/courses/{id}
+      roles: []
+    - path: /api/v1/courses/{courseId}/**
+      roles: []
 
