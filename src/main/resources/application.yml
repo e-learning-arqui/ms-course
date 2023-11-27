@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: ms-course
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: ${ISSUER_URI:http://localhost:8080/realms/cognito-hub}
+          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
   datasource:
     #url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cognito-hub}
     url: jdbc:postgresql://localhost:5432/cognito
@@ -41,11 +47,13 @@ keycloak:
     secret: xLnnPpvGRBkekbUuVLnnudrkSVDTCzFc
     realm: cognito-hub
 
-token:
-  converter:
-    principal-attribute: preferred_username
-    resource-id: cognito-hub
 aws:
   accessKeyId: AKIAZEFO5LK5IVSMJ3MN
   secretKey: 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
   region: us-east-1
+
+token:
+  converter:
+    principal-attribute: preferred_username
+    resource-id: cognito-hub
+
