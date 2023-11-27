@@ -131,7 +131,7 @@ public class CourseBl {
         CourseDtoBuilder.Builder builder = new CourseDtoBuilder.Builder()
                 .withTitle(courseEntity.getTitle())
                 .withDescription(courseEntity.getDescription())
-
+                .withId(courseEntity.getCourseId())
                 .withVersion(courseEntity.getVersion())
                 .withDuration(courseEntity.getDuration())
                 .withLanguageId(courseEntity.getLanguageId().getId())
